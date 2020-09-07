@@ -1,7 +1,5 @@
 package com.testing.receiver.springreceiverapp.config;
 
-import java.util.Arrays;
-
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
@@ -23,8 +21,8 @@ public class MessagingConfiguration {
 	private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 	private static final String MESSAGE_QUEUE = "message_queue";
 
-	@Autowired
-	private MessageReceiver messageReceiver;
+//	@Autowired
+//	private MessageReceiver messageReceiver;
 
 	@Bean
 	public ConnectionFactory connectionFactory() {

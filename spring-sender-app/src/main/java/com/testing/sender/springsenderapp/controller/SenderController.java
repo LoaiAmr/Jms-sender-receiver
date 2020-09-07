@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.testing.sender.springsenderapp.model.Employee;
+import com.testing.sender.springsenderapp.model.ParentMessage;
 import com.testing.sender.springsenderapp.model.Product;
 import com.testing.sender.springsenderapp.service.SenderService;
 
@@ -19,30 +21,21 @@ import com.testing.sender.springsenderapp.service.SenderService;
 @CrossOrigin
 public class SenderController {
 
-	private static final Logger log = LoggerFactory.getLogger(Product.class);
-
 	@Autowired
 	private SenderService senderService;
 
-	private final JmsTemplate jmsTemplate;
-
-	public SenderController(JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
-	}
-
 	@PostMapping("/send-product")
-	public ResponseEntity<Product> sendProduct(@RequestBody final Product productSended) {
-
+	public ResponseEntity<ParentMessage> sendProduct(@RequestBody Product productSended) {
 		Product product = senderService.sendProduct(productSended);
-		return ResponseEntity.ok(productSended);
+		return ResponseEntity.ok(product);
+
 	}
-
-	@PostMapping("/send")
-	public ResponseEntity<Object> send(@RequestBody Product productSended) {
-		log.info("Sending a Product...." + productSended);
-		 jmsTemplate.convertAndSend("message_queue", productSended);
-		return ResponseEntity.ok(productSended);
-
+	
+	@PostMapping("/send-emp")
+	public ResponseEntity<ParentMessage> sendEmployee(@RequestBody Employee empSended) {
+		Employee employee = senderService.sendEmployee(empSended);
+		return ResponseEntity.ok(employee);
+		
 	}
 
 }
