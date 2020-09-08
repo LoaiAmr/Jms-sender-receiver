@@ -1,8 +1,10 @@
 package com.testing.sender.springsenderapp.config;
 
+import java.util.Arrays;
+
 import javax.jms.ConnectionFactory;
 
-import org.apache.activemq.spring.ActiveMQConnectionFactory;
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
@@ -19,7 +21,9 @@ public class MessagingConfiguration {
 	public ConnectionFactory connectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
-//		connectionFactory.setTrustedPackages(Arrays.asList("com.testing.sender"));
+//		connectionFactory.setTrustedPackages(Arrays.asList("com.testing.sender.springsenderapp.model.ParentMessage,"
+//															+ "com.testing.sender.springsenderapp.model.Employee,"
+//															+ "com.testing.sender.springsenderapp.model.Product".split(",")));
 		connectionFactory.setTrustAllPackages(true);
 		return connectionFactory;
 	}
